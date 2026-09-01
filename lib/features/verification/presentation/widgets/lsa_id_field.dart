@@ -10,13 +10,20 @@ class LsaIdField extends StatelessWidget {
       children: [
         const Text(
           'LSA ID',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         const SizedBox(height: 8),
         TextField(
-          controller: TextEditingController(text: 'LSA-7049'),
+          controller: TextEditingController(
+            text: 'LSA-7049',
+          ),
           readOnly: true,
-          decoration: const InputDecoration(border: OutlineInputBorder()),
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+          ),
         ),
       ],
     );

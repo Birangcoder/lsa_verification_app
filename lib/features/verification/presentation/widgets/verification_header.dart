@@ -5,15 +5,18 @@ class VerificationHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'LSA Onboarding Gate',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
-        SizedBox(height: 8),
-        Text('HabotConnect Data Compliance', style: TextStyle(fontSize: 16)),
+        const SizedBox(height: 6),
+        Text(
+          'HabotConnect Data Compliance',
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
       ],
     );
   }
