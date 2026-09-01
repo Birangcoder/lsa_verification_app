@@ -13,6 +13,9 @@ class LsaVerificationScreen extends StatelessWidget {
 
   static final VerificationController _controller = VerificationController();
 
+  static final TextEditingController _consentController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,26 +34,36 @@ class LsaVerificationScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              const ConsentCodeField(),
+              // User input controller is now connected.
+              ConsentCodeField(controller: _consentController),
 
               const SizedBox(height: 24),
 
+              // Status + message.
               ValueListenableBuilder<VerificationStatus>(
                 valueListenable: _controller.status,
                 builder: (context, status, child) {
-                  return StatusBanner(status: status);
+                  return ValueListenableBuilder<String>(
+                    valueListenable: _controller.message,
+                    builder: (context, message, child) {
+                      return StatusBanner(status: status, message: message);
+                    },
+                  );
                 },
               ),
 
               const SizedBox(height: 24),
 
+              // Submit button.
               ValueListenableBuilder<VerificationStatus>(
                 valueListenable: _controller.status,
                 builder: (context, status, child) {
                   return VerifyButton(
                     isProcessing: status == VerificationStatus.processing,
                     onPressed: () async {
-                      await _controller.submit();
+                      await _controller.submit(
+                        parentConsentCode: _consentController.text,
+                      );
                     },
                   );
                 },
@@ -58,8 +71,10 @@ class LsaVerificationScreen extends StatelessWidget {
 
               const SizedBox(height: 12),
 
+              // Reset.
               OutlinedButton(
                 onPressed: () {
+                  _consentController.clear();
                   _controller.reset();
                 },
                 child: const Text('Reset'),

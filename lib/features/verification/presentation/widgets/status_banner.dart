@@ -4,8 +4,9 @@ import '../../../../core/enums/verification_status.dart';
 
 class StatusBanner extends StatelessWidget {
   final VerificationStatus status;
+  final String message;
 
-  const StatusBanner({super.key, required this.status});
+  const StatusBanner({super.key, required this.status, required this.message});
 
   String get statusText {
     switch (status) {
@@ -13,10 +14,13 @@ class StatusBanner extends StatelessWidget {
         return 'Idle';
 
       case VerificationStatus.processing:
-        return 'Processing...';
+        return 'Processing';
 
       case VerificationStatus.success:
         return 'Success';
+
+      case VerificationStatus.error:
+        return 'Error';
     }
   }
 
@@ -28,9 +32,16 @@ class StatusBanner extends StatelessWidget {
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Text(
-        'Status: $statusText',
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Status: $statusText',
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 6),
+          Text(message),
+        ],
       ),
     );
   }

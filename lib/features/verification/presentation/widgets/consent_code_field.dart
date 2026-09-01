@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 
 class ConsentCodeField extends StatelessWidget {
-  const ConsentCodeField({super.key});
+  final TextEditingController controller;
+
+  const ConsentCodeField({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Parent Consent Code',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         TextField(
-          decoration: InputDecoration(
+          controller: controller,
+          decoration: const InputDecoration(
             border: OutlineInputBorder(),
             hintText: 'Enter parent consent code',
           ),
