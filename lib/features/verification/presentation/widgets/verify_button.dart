@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 
 class VerifyButton extends StatelessWidget {
-  const VerifyButton({super.key});
+  final bool isProcessing;
+  final VoidCallback onPressed;
+
+  const VerifyButton({
+    super.key,
+    required this.isProcessing,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 50,
       child: ElevatedButton(
-        onPressed: () {
-          // Submission logic will be added later.
-        },
-        child: const Text('Verify & Submit'),
+        onPressed: isProcessing ? null : onPressed,
+        child: isProcessing
+            ? const CircularProgressIndicator()
+            : const Text('Verify & Submit'),
       ),
     );
   }

@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/enums/verification_status.dart';
+
 class StatusBanner extends StatelessWidget {
-  const StatusBanner({super.key});
+  final VerificationStatus status;
+
+  const StatusBanner({super.key, required this.status});
+
+  String get statusText {
+    switch (status) {
+      case VerificationStatus.idle:
+        return 'Idle';
+
+      case VerificationStatus.processing:
+        return 'Processing...';
+
+      case VerificationStatus.success:
+        return 'Success';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +28,9 @@ class StatusBanner extends StatelessWidget {
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: const Text(
-        'Status: Idle',
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      child: Text(
+        'Status: $statusText',
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
     );
   }
